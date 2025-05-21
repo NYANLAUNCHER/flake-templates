@@ -56,6 +56,13 @@
     };
   in {
     templates = {
+      basic = mkWelcomeText {
+        path = ./basic;
+        name = "Basic Template";
+        description = ''
+          A basic template that contains a devshell, and package and app configurations for a default and a development build.
+        '';
+      };
       empty = mkWelcomeText {
         name = "Empty Template";
         description = ''
@@ -164,5 +171,6 @@
         ];
       };
     };
+    defaultTemplate = self.templates.basic;
   };
 }
