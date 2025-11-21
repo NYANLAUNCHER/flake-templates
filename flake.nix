@@ -66,9 +66,16 @@
       empty = mkWelcomeText {
         name = "Empty Template";
         description = ''
-          A simple flake that provides a devshell
+          A simple flake that provides a devshell.
         '';
         path = ./empty;
+      };
+      flake-parts = mkWelcomeText {
+        name = "";
+        description = ''
+          A simple flake using hercules-ci/flake-parts that provides a devshell.
+        '';
+        path = ./flake-parts;
       };
       rust = mkWelcomeText {
         path = ./rust;
@@ -171,6 +178,6 @@
         ];
       };
     };
-    defaultTemplate = self.templates.basic;
+    defaultTemplate = self.templates.flake-parts;
   };
 }

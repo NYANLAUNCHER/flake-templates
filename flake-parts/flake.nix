@@ -2,11 +2,15 @@
   description = "Your new project, powered by flake-parts!";
 
   inputs = {
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     flake-parts.url = "github:hercules-ci/flake-parts";
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable"; # This should point to whichever nixpkgs rev you want.
   };
 
   outputs = { flake-parts, ... } @ inputs: flake-parts.lib.mkFlake { inherit inputs; } {
+    # Declared systems that your flake supports. These will be enumerated in perSystem
+    systems = [ "x86_64-linux" "aarch64-linux" "x86_64-darwin" "aarch64-darwin" ];
+
+    # Import flake modules
     imports = [
       # ./module.nix
       # inputs.foo.flakeModule
@@ -25,14 +29,21 @@
 
       # This is equivalent to packages.<system>.default
       packages.default = pkgs.hello;
+
+      devShells.default = pkgs.mkShell {
+        buildInputs = with pkgs; [];
+        nativeBuildInputs = with pkgs; [
+          hello
+        ];
+        shellHook = ''
+          hello
+        '';
+      };
     };
 
     flake = {
       # The usual flake attributes can be defined here, including
       # system-agnostic and/or arbitrary outputs.
     };
-
-    # Declared systems that your flake supports. These will be enumerated in perSystem
-    systems = [ "x86_64-linux" "aarch64-linux" "x86_64-darwin" "aarch64-darwin" ];
   };
 }
