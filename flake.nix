@@ -177,6 +177,16 @@
           "gcc"
         ];
       };
+      cpp = mkWelcomeText {
+        path = ./cpp;
+        name = "C++ Template";
+        description = ''
+          A basic C++ application template with a package build.
+        '';
+        buildTools = [
+          "g++"
+        ];
+      };
     };
     defaultTemplate = self.templates.flake-parts;
   };
