@@ -1,5 +1,5 @@
 {
-  description = "An incomplete BREP (Boundary REPresentation) viewer written in CPP using OpenGL.";
+  description = "C++ Template";
 
   inputs.nixpkgs.url = "nixpkgs/nixos-unstable";
 
@@ -9,19 +9,12 @@
     pkgs = import nixpkgs { inherit system; };
 
     ##########################################
-    pname = "brepviewer";
+    pname = "hello-world";
     version = "0.1.0";
     nativeBuildInputs = with pkgs; [ # build-time dependencies
       pkg-config autoconf automake gcc rsync
     ];
     buildInputs = with pkgs; [ # runtime dependencies
-      libGL
-      libGLU
-      glew
-      glfw
-      glm
-      lua
-      assimp
     ];
     ##########################################
   in {
@@ -41,9 +34,6 @@
         # dev-shell utils
         lldb gdb
         unixtools.xxd
-        renderdoc
-        mesa-demos
-        vdpauinfo
       ]);
       shellHook = ''
         export pname=${pname}
