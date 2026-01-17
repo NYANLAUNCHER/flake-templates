@@ -30,6 +30,9 @@
           nativeBuildInputs = with pkgs; [
             alejandra
             rust-analyzer
+            # For nightly:
+            #rust-analyzer-nightly
+            #(pkgs.fenix.complete.withComponents [
             (pkgs.fenix.stable.withComponents [
               "cargo"
               "clippy"

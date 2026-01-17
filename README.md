@@ -1,4 +1,4 @@
-# Nix Community Templates
+# NYANLAUNCHER's Flake Templates
 
 A collection of basic templates.
 Using [flake-utils](https://github.com/numtide/flake-utils).

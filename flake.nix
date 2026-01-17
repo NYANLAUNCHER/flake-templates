@@ -1,5 +1,5 @@
 {
-  description = "Nix Community Templates";
+  description = "NYANLAUNCHER's Custom Flake templates";
 
   outputs = {self}: let
     mkWelcomeText = {
