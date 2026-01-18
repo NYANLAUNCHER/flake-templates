@@ -41,6 +41,9 @@
               "rustfmt"
             ])
           ];
+          shellHook = ''
+            export RUST_BACKTRACE=1
+          '';
         };
       }
     );
