@@ -1,5 +1,7 @@
 # Nix
 result*
+outputs
 
 # Misc
+**/Session.vim
 .direnv

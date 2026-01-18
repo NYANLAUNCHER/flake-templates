@@ -1,8 +1,10 @@
-target/
+# Rust
+**/target
 
 # Nix
 result*
-result-*
+outputs
 
 # Misc
+**/Session.vim
 .direnv

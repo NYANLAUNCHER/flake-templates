@@ -1,6 +1,8 @@
 # Build artifacts
 build/**
 result
+outputs
+
 # Tools
 .ccls-cache/
 .ccls
