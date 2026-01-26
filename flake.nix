@@ -89,14 +89,15 @@
         ];
       };
       rust-dioxus = mkWelcomeText {
-        path = ./rust;
+        path = ./rust-dioxus;
         name = "Rust Template";
         description = ''
-          A basic rust application template with a package build.
+          A basic dioxus application template with a package build.
         '';
         buildTools = [
           "All essential rust tools"
           "rust-analyzer"
+          "dioxus"
         ];
       };
       zig = mkWelcomeText {
