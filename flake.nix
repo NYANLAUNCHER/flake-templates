@@ -90,7 +90,7 @@
       };
       rust-dioxus = mkWelcomeText {
         path = ./rust-dioxus;
-        name = "Rust Template";
+        name = "Dioxus Template";
         description = ''
           A basic dioxus application template with a package build.
         '';
