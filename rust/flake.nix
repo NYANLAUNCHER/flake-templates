@@ -20,29 +20,45 @@
           overlays = [fenix.overlays.default];
         };
 
+        rustToolchain = with pkgs.fenix; combine [
+          (with complete; [
+            cargo 
+            clippy 
+            rust-src 
+            rustc 
+            rustfmt
+          ])
+          # Add build targets
+          targets.wasm32-unknown-unknown.latest.rust-std
+        ];
+
+        # Buildtime dependencies
+        nativeBuildInputs = (with pkgs; [
+          alejandra
+          pkg-config
+          rust-analyzer-nightly
+        ]) ++ [
+          rustToolchain
+        ];
+
+        # Runtime dependencies
+        buildInputs = with pkgs; [
+          glib
+          openssl
+        ];
+
         naersk' = pkgs.callPackage naersk {};
       in rec {
         defaultPackage = naersk'.buildPackage {
+          inherit buildInputs nativeBuildInputs;
           src = ./.;
         };
 
         devShell = pkgs.mkShell {
-          nativeBuildInputs = with pkgs; [
-            alejandra
-            rust-analyzer
-            # For nightly:
-            #rust-analyzer-nightly
-            #(pkgs.fenix.complete.withComponents [
-            (pkgs.fenix.stable.withComponents [
-              "cargo"
-              "clippy"
-              "rust-src"
-              "rustc"
-              "rustfmt"
-            ])
-          ];
+          inherit buildInputs nativeBuildInputs;
           shellHook = ''
-            export RUST_BACKTRACE=1
+            export RUST_BACKTRACE=full
+            export LD_LIBRARY_PATH="${pkgs.lib.makeLibraryPath buildInputs}"
           '';
         };
       }
