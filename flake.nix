@@ -88,6 +88,17 @@
           "rust-analyzer"
         ];
       };
+      rust-dioxus = mkWelcomeText {
+        path = ./rust;
+        name = "Rust Template";
+        description = ''
+          A basic rust application template with a package build.
+        '';
+        buildTools = [
+          "All essential rust tools"
+          "rust-analyzer"
+        ];
+      };
       zig = mkWelcomeText {
         path = ./zig;
         name = "Zig Template";
