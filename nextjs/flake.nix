@@ -16,7 +16,7 @@
         pkgs = nixpkgs.legacyPackages.${system};
         pname = ""; # <same as package.json name>
         version = "0.1.0";
-        buildInputs = with pkgs; [ nodejs_20 nodePackages_latest.pnpm ];
+        buildInputs = with pkgs; [ nodejs_26 pnpm ];
         nativeBuildInputs = buildInputs;
         npmDepsHash = ""; # <prefetch-npm-deps package-lock.json>
       in {
@@ -39,7 +39,7 @@
             echo "
                 #!/usr/bin/env bash
                 cd $lib
-                ${pkgs.nodePackages_latest.pnpm}/bin/pnpm run start" > $exe
+                ${pkgs.pnpm}/bin/pnpm run start" > $exe
           '';
         };
       });
