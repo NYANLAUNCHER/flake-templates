@@ -6,13 +6,9 @@
     flake-utils.url = "github:numtide/flake-utils";
   };
 
-  outputs = {
-    nixpkgs,
-    flake-utils,
-    ...
-  }:
-    flake-utils.lib.eachDefaultSystem (
-      system: let
+  outputs = { nixpkgs, flake-utils, ... }:
+    flake-utils.lib.eachDefaultSystem (system:
+      let
         pkgs = import nixpkgs {
           inherit system;
           config = {
@@ -20,25 +16,20 @@
             allowUnfree = true;
           };
         };
-        nativeBuildInputs = [
-        ];
+        nativeBuildInputs = [ ];
 
-        buildInputs = [
-          androidSdk
-          pkgs.flutter
-          pkgs.jdk11
-        ];
+        buildInputs = [ androidSdk pkgs.flutter pkgs.jdk11 ];
 
         # Android config
         buildToolsVersion = "30.0.3";
         androidComposition = pkgs.androidenv.composeAndroidPackages {
-          buildToolsVersions = [buildToolsVersion "28.0.3"];
-          platformVersions = ["31" "28"];
-          abiVersions = ["armeabi-v7a" "arm64-v8a"];
+          buildToolsVersions = [ buildToolsVersion "28.0.3" ];
+          platformVersions = [ "31" "28" ];
+          abiVersions = [ "armeabi-v7a" "arm64-v8a" ];
         };
         androidSdk = androidComposition.androidsdk;
       in {
-        devShells.default = pkgs.mkShell {inherit nativeBuildInputs buildInputs;};
-      }
-    );
+        devShells.default =
+          pkgs.mkShell { inherit nativeBuildInputs buildInputs; };
+      });
 }

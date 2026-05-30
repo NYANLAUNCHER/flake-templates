@@ -6,24 +6,19 @@
     flake-utils.url = "github:numtide/flake-utils";
   };
 
-  outputs = {
-    nixpkgs,
-    flake-utils,
-    ...
-  }:
-    flake-utils.lib.eachDefaultSystem (
-      system: let
+  outputs = { nixpkgs, flake-utils, ... }:
+    flake-utils.lib.eachDefaultSystem (system:
+      let
         pkgs = nixpkgs.legacyPackages.${system};
 
         python = pkgs.python310;
 
-        nativeBuildInputs = with pkgs; [
-          python
-        ];
+        nativeBuildInputs = with pkgs; [ python ];
 
-        buildInputs = with pkgs; [];
+        buildInputs = with pkgs; [ ];
       in {
-        devShells.default = pkgs.mkShell {inherit nativeBuildInputs buildInputs;};
+        devShells.default =
+          pkgs.mkShell { inherit nativeBuildInputs buildInputs; };
 
         packages.default = python.pkgs.buildPythonApplication {
           pname = "template";
@@ -37,6 +32,5 @@
 
           inherit nativeBuildInputs buildInputs;
         };
-      }
-    );
+      });
 }

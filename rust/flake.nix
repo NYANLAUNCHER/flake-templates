@@ -6,25 +6,17 @@
     fenix.url = "github:nix-community/fenix";
   };
 
-  outputs = {
-    self,
-    flake-utils,
-    naersk,
-    nixpkgs,
-    fenix,
-  }:
-    flake-utils.lib.eachDefaultSystem (
-      system: let
+  outputs = { self, flake-utils, naersk, nixpkgs, fenix, }:
+    flake-utils.lib.eachDefaultSystem (system:
+      let
         pkgs = (import nixpkgs) {
           inherit system;
-          overlays = [fenix.overlays.default];
+          overlays = [ fenix.overlays.default ];
         };
 
-        naersk' = pkgs.callPackage naersk {};
+        naersk' = pkgs.callPackage naersk { };
       in rec {
-        defaultPackage = naersk'.buildPackage {
-          src = ./.;
-        };
+        defaultPackage = naersk'.buildPackage { src = ./.; };
 
         devShell = pkgs.mkShell {
           nativeBuildInputs = with pkgs; [
@@ -39,6 +31,5 @@
             ])
           ];
         };
-      }
-    );
+      });
 }

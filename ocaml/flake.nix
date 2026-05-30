@@ -10,15 +10,8 @@
     };
   };
 
-  outputs =
-    {
-      self,
-      nixpkgs,
-      flake-utils,
-      ...
-    }:
-    flake-utils.lib.eachDefaultSystem (
-      system:
+  outputs = { self, nixpkgs, flake-utils, ... }:
+    flake-utils.lib.eachDefaultSystem (system:
       let
         pkgs = nixpkgs.legacyPackages.${system};
 
@@ -46,8 +39,7 @@
           # ocamlPackages.ocamlformat
           # ocamlPackages.ocp-indent
         ];
-      in
-      {
+      in {
         packages = {
           default = ocamlPackages.buildDunePackage {
             pname = "template";
@@ -61,7 +53,7 @@
           };
         };
 
-        devShells.default = pkgs.mkShell { inherit nativeBuildInputs buildInputs; };
-      }
-    );
+        devShells.default =
+          pkgs.mkShell { inherit nativeBuildInputs buildInputs; };
+      });
 }
