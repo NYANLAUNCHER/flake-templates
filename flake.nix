@@ -136,6 +136,15 @@
           buildTools =
             [ "javaPackages.compiler.openjdk21" "jdt-language-server" ];
         };
+        ######## Custom Templates: ########
+        rust-dioxus = mkWelcomeText {
+          path = ./rust-dioxus/;
+          name = "Rust Dioxus Template";
+          description = ''
+            A Rust project template for the Dioxus web framework.
+          '';
+          buildTools = [ "All essential rust tools" "rust-analyzer" ];
+        };
       };
     };
 }
