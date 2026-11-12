@@ -137,6 +137,14 @@
             [ "javaPackages.compiler.openjdk21" "jdt-language-server" ];
         };
         ######## Custom Templates: ########
+        meson = mkWelcomeText {
+          path = ./meson;
+          name = "Meson Project Template";
+          description = ''
+            A C/C++ project template for the Meson build system.
+          '';
+          buildTools = [ "gcc" "meson" "ninja" ];
+        };
         rust-bevy = mkWelcomeText {
           path = ./rust-bevy;
           name = "Rust Bevy Template";

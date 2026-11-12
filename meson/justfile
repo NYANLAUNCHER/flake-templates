@@ -1,0 +1,27 @@
+export pname := env('pname')
+# These paths must end with "/"
+build_dir := "./build/"
+proj_dir := "./"
+
+# Build project
+build: setup
+    cd {{build_dir}} && ninja
+
+# Setup project and configure Meson build system
+setup:
+    [ ! -d {{build_dir}} ] && meson setup {{build_dir}} {{proj_dir}} || true
+    [ ! -f {{proj_dir + "compile_commands.json"}} ] && ln -s {{build_dir + "compile_commands.json"}} || true
+
+# Delete build files before rebuilding
+rebuild:
+    rm -rf {{build_dir}}
+    just build
+
+# Build then run executable
+run: build
+    {{build_dir + pname}}
+
+# Delete all files ignored by .gitignore
+[confirm("Save all files untracked by git with `git stash` before confirming.")]
+clean:
+    git clean -fdX
