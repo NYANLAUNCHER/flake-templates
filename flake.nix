@@ -137,6 +137,14 @@
             [ "javaPackages.compiler.openjdk21" "jdt-language-server" ];
         };
         ######## Custom Templates: ########
+        rust-bevy = mkWelcomeText {
+          path = ./rust-bevy;
+          name = "Rust Bevy Template";
+          description = ''
+            A Rust project template for the Bevy game engine.
+          '';
+          buildTools = [ "All essential rust tools" "rust-analyzer" ];
+        };
         rust-dioxus = mkWelcomeText {
           path = ./rust-dioxus/;
           name = "Rust Dioxus Template";
