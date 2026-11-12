@@ -5,7 +5,7 @@ proj_dir := "./"
 
 # Build project
 build: setup
-    cd {{build_dir}} && ninja
+    cd {{build_dir}} && meson compile -C {{build_dir}}
 
 # Setup project and configure Meson build system
 setup:
