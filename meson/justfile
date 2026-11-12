@@ -1,4 +1,5 @@
 export pname := env('pname')
+export out := env('out')
 # These paths must end with "/"
 build_dir := "./build/"
 proj_dir := "./"
@@ -16,6 +17,10 @@ setup:
 rebuild:
     rm -rf {{build_dir}}
     just build
+
+# Handle installing application files
+install:
+    meson install -C {{build_dir}}
 
 # Build then run executable
 run: build
