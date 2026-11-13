@@ -162,7 +162,7 @@
           buildTools = [ "All essential rust tools" "rust-analyzer" ];
         };
         rust-dioxus = mkWelcomeText {
-          path = ./rust-dioxus/;
+          path = ./rust-dioxus;
           name = "Rust Dioxus Template";
           description = ''
             A Rust project template for the Dioxus web framework.
