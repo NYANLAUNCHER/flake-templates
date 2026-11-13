@@ -145,6 +145,14 @@
           '';
           buildTools = [ "gcc" "meson" "ninja" ];
         };
+        xmake = mkWelcomeText {
+          path = ./xmake;
+          name = "Xmake Project Template";
+          description = ''
+            A C/C++ project template for the Xmake build system.
+          '';
+          buildTools = [ "gcc" "xmake" ];
+        };
         rust-bevy = mkWelcomeText {
           path = ./rust-bevy;
           name = "Rust Bevy Template";
