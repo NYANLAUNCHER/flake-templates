@@ -1,11 +1,9 @@
 add_rules("mode.debug", "mode.release")
+add_rules("plugin.compile_commands.autoupdate", { outputdir = "." })
 
 target("tmp")
     set_kind("binary")
     add_files("src/*.cpp")
-    add_rules("plugin.compile_commands.autoupdate", {
-      outputdir = "."
-    })
 
 --
 -- If you want to known more usage about xmake, please see https://xmake.io

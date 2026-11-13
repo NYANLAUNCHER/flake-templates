@@ -22,7 +22,6 @@
           pkg-config
           xmake
           clang
-          just # Use justfiles for project administration
         ];
         buildInputs = with pkgs; [ # runtime dependencies
         ];
@@ -30,10 +29,10 @@
         packages.default = pkgs.stdenv.mkDerivation {
           inherit buildInputs nativeBuildInputs pname version src;
           buildPhase = ''
-            just build
+            xmake build
           '';
           installPhase = ''
-            just install
+            xmake install
           '';
         };
         devShells.default = pkgs.mkShell {
