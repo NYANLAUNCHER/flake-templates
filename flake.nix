@@ -169,6 +169,14 @@
           '';
           buildTools = [ "All essential rust tools" "rust-analyzer" ];
         };
+        claude-container = mkWelcomeText {
+          path = ./claude-container;
+          name = "Dockerized Claude Code Environment";
+          description = ''
+            A project template for using Claude Code cli in a Docker container.
+          '';
+          buildTools = [ "docker" "claude-code" ];
+        };
       };
     };
 }

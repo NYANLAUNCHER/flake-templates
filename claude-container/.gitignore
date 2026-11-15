@@ -1,0 +1,13 @@
+# Global Claude state, Contains personal data
+.claude/
+.claude.json
+# Symlink to `.claude/skills/`
+skills
+# Source files for Claude code to access
+src/
+
+# Nix
+result*
+
+# Misc
+.direnv

@@ -1,0 +1,40 @@
+# List all available recipies
+@_default:
+    just --list
+
+# Create bind mount directories and do requisite setup for the Docker container
+@setup: 
+    echo {{MAGENTA}}
+    [[ -d ~/.claude ]] && cp -rf ~/.claude .; echo "Copied '~/.claude/' to './.claude/'." || mkdir .claude; echo "Made directory './.claude/'."
+    [[ -f ~/.claude.json ]] && cp -f ~/.claude.json .; echo "Copied '~/.claude.json' to './.claude.json'." || touch .claude.json; echo "Made file './.claude.json'."
+    -mkdir .claude/skills &> /dev/null
+    -rm skills &> /dev/null
+    ln -s .claude/skills skills # skills -> .claude/skills
+    echo "Made symlink './skills' link to '.claude/skills'."
+    -mkdir src &> /dev/null
+    echo "Made directory './src/'."
+    echo {{BLUE+UNDERLINE}}
+    echo "Setup Instructions:"
+    echo {{NORMAL+GREEN}}
+    echo "1. Setup skills and Claude projects:"
+    echo "  1a. Git clone or copy global Claude skills into the 'skill/' directory."
+    echo "  1b. Git clone or copy your Claude projects into the 'src/' directory."
+    echo "2. Enjoy!!!"
+    echo {{NORMAL}}
+
+# Run the Claude code container
+run:
+    docker compose run --rm claude
+
+# Rebuild the container from scratch
+rebuild:
+     docker compose build --no-cache && docker compose up -d
+
+# Run `just docker-shell <id>` where <id> is the service id from `docker compose ps`
+docker-shell id="claude":
+    docker compose exec -it {{id}} bash
+
+# Simple alias for `git clean -fdX`
+[confirm("Will delete all untracked files including all Claude state (see: .gitignore). Type 'y' to confirm.")]
+clean:
+    git clean -fdX

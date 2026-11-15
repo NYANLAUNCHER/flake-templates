@@ -1,0 +1,37 @@
+services:
+  claude:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        USER_ID: ${HOST_UID:-1000}
+        GROUP_ID: ${HOST_GID:-1000}
+
+    image: claude-container:latest
+    container_name: claude-container
+
+    user: "${HOST_UID:-1000}:${HOST_GID:-1000}"
+
+    working_dir: /home/nixos/src
+
+    environment:
+      HOME: /home/nixos
+      XDG_CONFIG_HOME: /home/nixos/.config
+      TERM: xterm-256color
+
+    volumes:
+      # Global Claude state
+      - ./.claude:/home/nixos/.claude
+      - ./.claude.json:/home/nixos/.claude.json
+      # Claude workspace
+      - ./src:/home/nixos/src
+      # Windows filesystem (WSL2)
+      - /mnt/c:/mnt/c
+      # Persist Nix packages
+      #- ./nix:/nix
+
+    stdin_open: true
+    tty: true
+    init: true
+
+    command: ["claude"]
