@@ -11,10 +11,11 @@
       let
         pkgs = nixpkgs.legacyPackages.${system};
 
-        nativeBuildInputs = with pkgs; [ ];
-        buildInputs = with pkgs; [ ];
+        nativeBuildInputs = with pkgs; [ # build-time dependencies
+        ];
+        buildInputs = with pkgs; [ # runtime dependencies
+        ];
       in {
-        devShells.default =
-          pkgs.mkShell { inherit nativeBuildInputs buildInputs; };
+        devShells.default = pkgs.mkShell { inherit nativeBuildInputs buildInputs; };
       });
 }
