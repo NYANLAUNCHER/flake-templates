@@ -14,22 +14,22 @@ My C/C++ project using [Xmake](https://xmake.io/) build system.
 │     ├─ share/
 │     └─ etc/
 │
-├─ docs/
+├─ doc/
 │  └─ justfile - build documentation
 │
-├─ tools/ - developer scripts & integrations
-│
-├─ tests/ - for tests that don't belong in src/<target>/tests/
+├─ test/ - for tests that don't belong in src/<target>/test/
 │  ├─ xmake.lua
 │  └─ justfile - `just test` interface
 │
-├─ dist/ - platform-dependent distribution files
+├─ dist/ - platform-dependent files to distribute
 │  ├─ icons/
 │  ├─ fonts/
 │  ├─ freedesktop/<pname>.desktop
 │  ├─ darwin/
 │  ├─ windows/
 │  └─ release_notes.txt
+│
+├─ tools/ - developer scripts & integrations
 │
 ├─ assets/ - runtime assets copied to build/<out>/share/<pname>/
 │  ├─ textures/
@@ -40,7 +40,7 @@ My C/C++ project using [Xmake](https://xmake.io/) build system.
 │
 ├─ repo/packages/ - local package definitions for Xrepo
 │
-├─ extern/ - git submodules
+├─ extern/ - git submodules, all managed externally
 │  └─ xmake.lua - expose git submodules as Xmake project targets
 │
 ├─ src/
@@ -48,7 +48,7 @@ My C/C++ project using [Xmake](https://xmake.io/) build system.
 │  │  └─ xmake.lua - describes outputs for the directories in build/<dist>/
 │  │
 │  └─ <pname>/ - default target
-│     ├─ tests/ - unit tests
+│     ├─ test/ - unit tests
 │     ├─ include/
 │     ├─ lua/
 │     ├─ main.c
